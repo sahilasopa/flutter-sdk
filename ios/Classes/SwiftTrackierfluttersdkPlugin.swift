@@ -359,21 +359,21 @@ public class SwiftTrackierfluttersdkPlugin: NSObject, FlutterPlugin, DeepLinkLis
 		let secretId = "\(dict?["secretId"] as? String ?? "")"
 		let secretKey = "\(dict?["secretKey"] as? String ?? "")"
 		let deeplinkKey = "\(dict?["deeplinkCallback"] as? String ?? "")"
-        let regionString = "\(dict?["region"] as? String ?? "")".lowercased()
+		let regionString = "\(dict?["region"] as? String ?? "")".lowercased()
 		let config = TrackierSDKConfig(appToken: appToken , env: environment)
 		config.setAppSecret(secretId: secretId, secretKey: secretKey)
 		config.setSDKVersion(sdkVersion: "1.6.73")
 		if (!deeplinkKey.isEmpty) {
 			config.setDeeplinkListerner(listener: self)
 		}
-        switch regionString {
-            case "in":
-                config.setRegion(.IN)
-            case "global":
-                config.setRegion(.GLOBAL)
-            default:
-                config.setRegion(.NONE)
-            }
+		switch regionString {
+			case "in":
+				config.setRegion(.IN)
+			case "global":
+				config.setRegion(.GLOBAL)
+			default:
+				config.setRegion(.NONE)
+			}
 		TrackierSDK.initialize(config: config)
 	}
 	
