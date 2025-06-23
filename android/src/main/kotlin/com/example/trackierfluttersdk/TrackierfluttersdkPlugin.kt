@@ -269,6 +269,7 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
         var secretKey = ""
         var manualmode = false
         var disableOrganic = false
+        var region = ""
         val configMap = call.arguments as MutableMap<*, *>
 
         if (configMap.containsKey("appToken")) {
@@ -315,7 +316,15 @@ class TrackierfluttersdkPlugin : FlutterPlugin, MethodCallHandler {
             }
         }
         trackierSDKConfig.setAttributionParams(attribution)
-        trackierSDKConfig.setSDKVersion("1.6.72")
+        if (configMap.containsKey("region")) {
+            region = configMap.get("region") as String
+            when (region) {
+                "in" -> trackierSDKConfig.setRegion(TrackierSDKConfig.Region.IN)
+                "global" -> trackierSDKConfig.setRegion(TrackierSDKConfig.Region.GLOBAL)
+            }
+        }
+
+        trackierSDKConfig.setSDKVersion("1.6.73")
         trackierSDKConfig.setSDKType("flutter_sdk")
         trackierSDKConfig.setAppSecret(secretId, secretKey)
         trackierSDKConfig.setManualMode(manualmode)

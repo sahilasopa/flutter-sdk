@@ -9,6 +9,7 @@ class TrackerSDKConfig {
   String secretKey = "";
   bool manualMode = false;
   bool disableOrganic = false;
+  TrackierRegion region = TrackierRegion.NONE;
 
   Map<String, dynamic> attributionParams = {};
 
@@ -48,6 +49,7 @@ class TrackerSDKConfig {
           case _deferredDeeplinkCallbackName:
             if (deferredDeeplinkCallback != null) {
               String? uri = call.arguments['uri'];
+              print("deeplink dart data "+uri.toString());
               deferredDeeplinkCallback!(uri);
             }
             break;
@@ -58,18 +60,29 @@ class TrackerSDKConfig {
     });
   }
 
+  void setRegion(TrackierRegion region) {
+    this.region = region;
+  }
+
   Map<String, dynamic> get toMap {
     Map<String, dynamic> configMap = {
       'appToken': appToken,
       'environment': envirnoment,
       'secretId': secretId,
       'secretKey': secretKey,
-      'deeplinkCallback' : _deferredDeeplinkCallbackName,
-      'setManualMode' : manualMode,
-      'disableOrganicTracking' : disableOrganic,
-      'attributionParams' : attributionParams
+      'deeplinkCallback': _deferredDeeplinkCallbackName,
+      'setManualMode': manualMode,
+      'disableOrganicTracking': disableOrganic,
+      'attributionParams': attributionParams,
+      'region': region.name.toLowerCase(),
     };
 
     return configMap;
   }
+}
+
+enum TrackierRegion {
+  NONE,
+  IN,
+  GLOBAL,
 }
