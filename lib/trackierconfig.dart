@@ -49,7 +49,6 @@ class TrackerSDKConfig {
           case _deferredDeeplinkCallbackName:
             if (deferredDeeplinkCallback != null) {
               String? uri = call.arguments['uri'];
-              print("deeplink dart data "+uri.toString());
               deferredDeeplinkCallback!(uri);
             }
             break;
