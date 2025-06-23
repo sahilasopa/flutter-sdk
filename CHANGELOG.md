@@ -1,3 +1,3 @@
-## 1.6.72
+## 1.6.73
 
-- update: resolved Deeplinks functions
+- feat: add function for adding region
